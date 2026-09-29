@@ -7,11 +7,15 @@
   --color-primary-hover: #5a3bb8;
   --color-on-primary: #ffffff;
   --color-focus: #b9a5f5;
+  --color-card-back: #6c4ad0;
+  --color-card-back-accent: #8f73e6;
+  --color-card-front: #ffffff;
 
   /* Typography */
   --font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-size-title: 1.5rem;
   --font-weight-bold: 600;
+  --font-size-card: clamp(2rem, 9vw, 3.5rem);
 
   /* Spacing */
   --space-sm: 12px;
@@ -19,6 +23,7 @@
   --space-lg: 24px;
   --space-btn-y: 10px;
   --space-btn-x: 18px;
+  --board-gap: clamp(8px, 2vw, 16px);
 
   /* Shape and effects */
   --radius-md: 8px;
@@ -26,4 +31,8 @@
   --focus-ring-width: 3px;
   --focus-ring-offset: 2px;
   --transition-fast: 0.2s;
+  --shadow-card: 0 2px 6px rgba(43, 37, 64, 0.2);
+  --card-flip-duration: 0.4s;
+  --card-perspective: 800px;
+  --board-max-width: 520px;
 }

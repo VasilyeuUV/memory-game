@@ -9,6 +9,9 @@
  *
  * @type {Readonly<{
  *   header: Readonly<{ root: string, title: string, actions: string }>,
+ *   main: string,
+ *   board: string,
+ *   card: Readonly<{ root: string, inner: string, front: string, back: string }>,
  *   button: string
  * }>}
  */
@@ -17,6 +20,14 @@ export const CLASS_NAMES = Object.freeze({
     root: 'header',
     title: 'header__title',
     actions: 'header__actions',
+  }),
+  main: 'main',
+  board: 'board',
+  card: Object.freeze({
+    root: 'card',
+    inner: 'card__inner',
+    front: 'card__face card__face--front',
+    back: 'card__face card__face--back',
   }),
   button: 'btn',
 });

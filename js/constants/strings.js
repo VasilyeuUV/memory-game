@@ -8,7 +8,8 @@
  * Interface texts, grouped by the component that uses them.
  *
  * @type {Readonly<{
- *   header: Readonly<{ title: string, newGame: string, leaderboard: string }>
+ *   header: Readonly<{ title: string, newGame: string, leaderboard: string }>,
+ *   card: Readonly<{ label: string }>
  * }>}
  */
 export const STRINGS = Object.freeze({
@@ -16,5 +17,8 @@ export const STRINGS = Object.freeze({
     title: 'Memory Game',
     newGame: 'New Game',
     leaderboard: 'Leaderboard',
+  }),
+  card: Object.freeze({
+    label: 'Card',
   }),
 });
