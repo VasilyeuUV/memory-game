@@ -35,3 +35,19 @@ export const SELECT_RESULT = Object.freeze({
   match: 'match',
   mismatch: 'mismatch',
 });
+
+
+/**
+ * Key under which the leaderboard is stored in `localStorage`.
+ *
+ * @type {string}
+ */
+export const LEADERBOARD_STORAGE_KEY = 'memory-game:leaderboard';
+
+
+/**
+ * Number of results kept and shown in the leaderboard.
+ *
+ * @type {number}
+ */
+export const LEADERBOARD_SIZE = 10;

@@ -8,6 +8,7 @@
 
 import { CLASS_NAMES } from '../constants/classNames.js';
 import { STRINGS } from '../constants/strings.js';
+import { loadResults } from '../game/storage.js';
 import { append, createButton, el } from './dom.js';
 
 
@@ -49,6 +50,20 @@ export function openVictoryModal(moves, onNewGame) {
       { label: STRINGS.victory.newGame, onClick: onNewGame },
       { label: STRINGS.victory.close },
     ],
+  });
+}
+
+
+/**
+ * Opens the leaderboard modal with the best results saved in `localStorage`.
+ *
+ * @returns {{ close: () => void }} Handle that closes the modal.
+ */
+export function openLeaderboardModal() {
+  return openModal({
+    title: STRINGS.leaderboard.title,
+    content: createLeaderboardContent(loadResults()),
+    buttons: [{ label: STRINGS.leaderboard.close }],
   });
 }
 
@@ -183,4 +198,60 @@ function createModal({ title, content, buttons = [], onBackdropClick }) {
   );
 
   return { overlay, dialog };
+}
+
+
+/**
+ * Formats a timestamp as `DD.MM.YYYY` in the local time zone.
+ *
+ * @param {number} timestamp Milliseconds since the Unix epoch.
+ * @returns {string} Date like `05.10.2026`.
+ */
+function formatDate(timestamp) {
+  const date = new Date(timestamp);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+
+  return `${day}.${month}.${date.getFullYear()}`;
+}
+
+
+/**
+ * Creates the content of the leaderboard modal: a table of results
+ * (rank, moves, date) or a message when there are no results yet.
+ *
+ * @param {import('../game/storage.js').GameResult[]} results Results from the best to the worst.
+ * @returns {HTMLElement} The table or the "no results" paragraph.
+ */
+function createLeaderboardContent(results) {
+  if (results.length === 0) {
+    return el('p', { className: CLASS_NAMES.leaderboard.empty, text: STRINGS.leaderboard.empty });
+  }
+
+  return el(
+    'table',
+    { className: CLASS_NAMES.leaderboard.table },
+    el(
+      'thead',
+      {},
+      el(
+        'tr',
+        {},
+        el('th', { text: STRINGS.leaderboard.rank }),
+        el('th', { text: STRINGS.leaderboard.moves }),
+        el('th', { text: STRINGS.leaderboard.date }),
+      ),
+    ),
+    el(
+      'tbody',
+      {},
+      results.map((result, index) => el(
+        'tr',
+        {},
+        el('td', { text: String(index + 1) }),
+        el('td', { text: String(result.moves) }),
+        el('td', { text: formatDate(result.date) }),
+      )),
+    ),
+  );
 }

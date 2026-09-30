@@ -8,6 +8,7 @@ import { MISMATCH_DELAY_MS, SELECT_RESULT, VICTORY_MODAL_DELAY_MS } from '../con
 import { STRINGS } from '../constants/strings.js';
 import { PAIRS_COUNT } from '../game/cards.js';
 import { closeMismatch, createGame, getFoundPairs, isWon, selectCard } from '../game/game.js';
+import { saveResult } from '../game/storage.js';
 import { el } from './dom.js';
 import { closeActiveModal, openVictoryModal } from './modal.js';
 
@@ -66,6 +67,7 @@ export function createGameScreen() {
         });
 
       if (isWon(state)) {
+        saveResult(state.moves);
         victoryTimer = setTimeout(showVictory, VICTORY_MODAL_DELAY_MS);
       }
       return;

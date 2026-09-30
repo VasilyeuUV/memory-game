@@ -13,6 +13,7 @@
  *   game: string,
  *   counters: Readonly<{ root: string, item: string, label: string, value: string }>,
  *   board: string,
+ *   leaderboard: Readonly<{ table: string, empty: string }>,
  *   modal: Readonly<{ root: string, dialog: string, title: string, body: string, actions: string }>,
  *   card: Readonly<{ root: string, inner: string, front: string, back: string }>,
  *   state: Readonly<{ flipped: string, matched: string }>,
@@ -34,6 +35,10 @@ export const CLASS_NAMES = Object.freeze({
     value: 'counters__value',
   }),
   board: 'board',
+  leaderboard: Object.freeze({
+    table: 'leaderboard__table',
+    empty: 'leaderboard__empty',
+  }),
   modal: Object.freeze({
     root: 'modal',
     dialog: 'modal__dialog',

@@ -5,6 +5,7 @@
 
 import { append, createHeader, createMain } from './ui/dom.js';
 import { createGameScreen } from './ui/gameScreen.js';
+import { openLeaderboardModal } from './ui/modal.js';
 
 /**
  * Appends the header and the game screen (a new game) to `<body>`.
@@ -16,7 +17,10 @@ function init() {
 
   append(
     document.body,
-    createHeader({ onNewGame: gameScreen.restart }),
+    createHeader({
+      onNewGame: gameScreen.restart,
+      onLeaderboard: openLeaderboardModal
+    }),
     createMain(gameScreen.element),
   );
 }
