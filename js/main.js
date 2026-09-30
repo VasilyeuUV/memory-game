@@ -4,23 +4,20 @@
  */
 
 import { CLASS_NAMES } from './constants/classNames.js';
-import { createGame } from './game/game.js';
-import { createBoard } from './ui/board.js';
 import { append, el } from './ui/dom.js';
+import { createGameScreen } from './ui/gameScreen.js';
 import { createHeader } from './ui/header.js';
 
 /**
- * Creates a new game and appends the header and the board to `<body>`.
+ * Appends the header and the game screen (a new game) to `<body>`.
  *
  * @returns {void}
  */
 function init() {
-  const game = createGame();
-
   append(
     document.body,
     createHeader(),
-    el('main', { className: CLASS_NAMES.main }, createBoard(game.cards)),
+    el('main', { className: CLASS_NAMES.main }, createGameScreen()),
   );
 }
 

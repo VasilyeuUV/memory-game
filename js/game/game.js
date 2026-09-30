@@ -4,6 +4,7 @@
  * the caller decides when a mismatched pair is closed (see {@link closeMismatch}).
  */
 
+import { SELECT_RESULT } from '../constants/game.js';
 import { PAIRS_COUNT, createShuffledDeck } from './cards.js';
 
 /**
@@ -25,7 +26,7 @@ import { PAIRS_COUNT, createShuffledDeck } from './cards.js';
  * - `match`    — the second card matched the first one, the pair stays open;
  * - `mismatch` — the second card differs, selection is locked until {@link closeMismatch}.
  *
- * @typedef {'ignored' | 'opened' | 'match' | 'mismatch'} SelectResult
+ * @typedef {typeof SELECT_RESULT[keyof typeof SELECT_RESULT]} SelectResult
  */
 
 
@@ -60,13 +61,13 @@ export function selectCard(state, cardId) {
     || state.locked
     || state.openedIds.includes(cardId)
     || state.matchedIds.includes(cardId)) {
-    return 'ignored';
+    return SELECT_RESULT.ignored;
   }
 
   state.openedIds.push(cardId);
 
   if (state.openedIds.length === 1) {
-    return 'opened';
+    return SELECT_RESULT.opened;
   }
 
   state.moves += 1;
@@ -76,11 +77,11 @@ export function selectCard(state, cardId) {
   if (findCard(state, firstId).symbol === card.symbol) {
     state.matchedIds.push(firstId, secondId);
     state.openedIds = [];
-    return 'match';
+    return SELECT_RESULT.match;
   }
 
   state.locked = true;
-  return 'mismatch';
+  return SELECT_RESULT.mismatch;
 }
 
 

@@ -10,8 +10,11 @@
  * @type {Readonly<{
  *   header: Readonly<{ root: string, title: string, actions: string }>,
  *   main: string,
+ *   game: string,
+ *   counters: Readonly<{ root: string, item: string, label: string, value: string }>,
  *   board: string,
  *   card: Readonly<{ root: string, inner: string, front: string, back: string }>,
+ *   state: Readonly<{ flipped: string, matched: string }>,
  *   button: string
  * }>}
  */
@@ -22,12 +25,23 @@ export const CLASS_NAMES = Object.freeze({
     actions: 'header__actions',
   }),
   main: 'main',
+  game: 'game',
+  counters: Object.freeze({
+    root: 'counters',
+    item: 'counters__item',
+    label: 'counters__label',
+    value: 'counters__value',
+  }),
   board: 'board',
   card: Object.freeze({
     root: 'card',
     inner: 'card__inner',
     front: 'card__face card__face--front',
     back: 'card__face card__face--back',
+  }),
+  state: Object.freeze({
+    flipped: 'is-flipped',
+    matched: 'is-matched',
   }),
   button: 'btn',
 });

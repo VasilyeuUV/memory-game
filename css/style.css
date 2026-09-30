@@ -97,6 +97,54 @@ body {
 
 
 /*###################################################################################################################*/
+/* #region Game */
+
+/* Game screen: counters above the board, as wide as the board. */
+.game {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: 100%;
+  max-width: var(--board-max-width);
+}
+
+/* Row with the "Moves" and "Pairs" counters. */
+.counters {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+/* One counter: label and value in a card-like block. */
+.counters__item {
+  display: flex;
+  flex: 1;
+  align-items: baseline;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-header);
+}
+
+/* Counter caption ("Moves", "Pairs"). */
+.counters__label {
+  font-size: var(--font-size-label);
+}
+
+/* Counter number, e.g. "5" or "3 / 8". */
+.counters__value {
+  font-size: var(--font-size-counter);
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+}
+
+/* #endregion */
+
+
+
+/*###################################################################################################################*/
 /* #region Board */
 
 /* Board: 4x4 grid of cards, scales down on small screens. */
@@ -104,8 +152,6 @@ body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--board-gap);
-  width: 100%;
-  max-width: var(--board-max-width);
 }
 
 /* #endregion */
@@ -170,6 +216,22 @@ body {
   font-size: var(--font-size-card);
   background: var(--color-card-front);
   transform: rotateY(180deg);
+}
+
+/* Opened card: the wrapper is turned so the front side is visible. */
+.card.is-flipped .card__inner {
+  transform: rotateY(180deg);
+}
+
+/* Opened cards cannot be selected again. */
+.card.is-flipped {
+  cursor: default;
+}
+
+/* Found pair: highlighted front side. */
+.card.is-matched .card__face--front {
+  background: var(--color-card-matched);
+  box-shadow: 0 0 0 var(--matched-ring-width) var(--color-card-matched-ring);
 }
 
 /* #endregion */

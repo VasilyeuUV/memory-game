@@ -9,6 +9,7 @@
  *
  * @type {Readonly<{
  *   header: Readonly<{ title: string, newGame: string, leaderboard: string }>,
+ *   counters: Readonly<{ moves: string, pairs: string }>,
  *   card: Readonly<{ label: string }>
  * }>}
  */
@@ -17,6 +18,10 @@ export const STRINGS = Object.freeze({
     title: 'Memory Game',
     newGame: 'New Game',
     leaderboard: 'Leaderboard',
+  }),
+  counters: Object.freeze({
+    moves: 'Moves',
+    pairs: 'Pairs',
   }),
   card: Object.freeze({
     label: 'Card',
