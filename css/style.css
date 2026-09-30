@@ -1,5 +1,21 @@
-/*###################################################################################################################*/
-/* #region Base */
+/*
+ * Entry stylesheet: connects the stylesheets below and holds the general styles
+ * (tags, common blocks, shared classes such as buttons).
+ * Component styles live in separate files:
+ *   const.css  - design tokens (CSS variables)
+ *   header.css - page header
+ *   game.css   - game screen: counters and board
+ *   card.css   - cards
+ *   modal.css  - modal windows
+ */
+
+@import url('const.css');
+@import url('header.css');
+@import url('game.css');
+@import url('card.css');
+@import url('modal.css');
+
+
 
 /* Include padding and border in the element size everywhere. */
 *,
@@ -17,13 +33,6 @@ body {
   color: var(--color-text);
 }
 
-/* #endregion */
-
-
-
-/*###################################################################################################################*/
-/* #region Layout */
-
 /* Main content area: centers the board horizontally. */
 .main {
   display: flex;
@@ -31,12 +40,10 @@ body {
   padding: var(--space-lg) var(--space-md);
 }
 
-/* #endregion */
-
 
 
 /*###################################################################################################################*/
-/* #region Shared components */
+/* #region Buttons */
 
 /* Button used in the header (and later in modals). */
 .btn {
@@ -62,176 +69,4 @@ body {
   outline-offset: var(--focus-ring-offset);
 }
 
-/* #endregion */
-
-
-/*###################################################################################################################*/
-/* #region Header */
-
-/* Page header: title on the left, actions on the right, wraps on narrow screens. */
-.header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-sm) var(--space-lg);
-  padding: var(--space-md) var(--space-lg);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-header);
-}
-
-/* Game title (h1). */
-.header__title {
-  margin: 0;
-  font-size: var(--font-size-title);
-}
-
-/* Container with the "New Game" and "Leaderboard" buttons. */
-.header__actions {
-  display: flex;
-  gap: var(--space-sm);
-}
-
-/* #endregion */
-
-
-
-/*###################################################################################################################*/
-/* #region Game */
-
-/* Game screen: counters above the board, as wide as the board. */
-.game {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-  width: 100%;
-  max-width: var(--board-max-width);
-}
-
-/* Row with the "Moves" and "Pairs" counters. */
-.counters {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--space-md);
-}
-
-/* One counter: label and value in a card-like block. */
-.counters__item {
-  display: flex;
-  flex: 1;
-  align-items: baseline;
-  justify-content: center;
-  gap: var(--space-xs);
-  padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-md);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-header);
-}
-
-/* Counter caption ("Moves", "Pairs"). */
-.counters__label {
-  font-size: var(--font-size-label);
-}
-
-/* Counter number, e.g. "5" or "3 / 8". */
-.counters__value {
-  font-size: var(--font-size-counter);
-  font-weight: var(--font-weight-bold);
-  font-variant-numeric: tabular-nums;
-}
-
-/* #endregion */
-
-
-
-/*###################################################################################################################*/
-/* #region Board */
-
-/* Board: 4x4 grid of cards, scales down on small screens. */
-.board {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--board-gap);
-}
-
-/* #endregion */
-
-
-
-/*###################################################################################################################*/
-/* #region Card */
-
-/* Card: square button, sets the perspective for the flip animation. */
-.card {
-  aspect-ratio: 1;
-  padding: 0;
-  border: none;
-  background: none;
-  perspective: var(--card-perspective);
-  cursor: pointer;
-}
-
-/* Card focused with the keyboard. */
-.card:focus-visible {
-  outline: var(--focus-ring-width) solid var(--color-focus);
-  outline-offset: var(--focus-ring-offset);
-  border-radius: var(--radius-md);
-}
-
-/* Rotating wrapper that holds both card sides. */
-.card__inner {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  transition: transform var(--card-flip-duration);
-}
-
-/* Common look of both sides; the reverse side of each is hidden. */
-.card__face {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
-  backface-visibility: hidden;
-}
-
-/* Card back (shown while the card is closed): striped pattern. */
-.card__face--back {
-  background: repeating-linear-gradient(
-    45deg,
-    var(--color-card-back),
-    var(--color-card-back) 10px,
-    var(--color-card-back-accent) 10px,
-    var(--color-card-back-accent) 20px
-  );
-}
-
-/* Card front with the emoji, pre-rotated so it is hidden until the flip. */
-.card__face--front {
-  font-size: var(--font-size-card);
-  background: var(--color-card-front);
-  transform: rotateY(180deg);
-}
-
-/* Opened card: the wrapper is turned so the front side is visible. */
-.card.is-flipped .card__inner {
-  transform: rotateY(180deg);
-}
-
-/* Opened cards cannot be selected again. */
-.card.is-flipped {
-  cursor: default;
-}
-
-/* Found pair: highlighted front side. */
-.card.is-matched .card__face--front {
-  background: var(--color-card-matched);
-  box-shadow: 0 0 0 var(--matched-ring-width) var(--color-card-matched-ring);
-}
-
-/* #endregion */
+/* #endregion Buttons */

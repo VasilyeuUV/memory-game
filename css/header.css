@@ -1,0 +1,23 @@
+/* Page header: title on the left, actions on the right, wraps on narrow screens. */
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm) var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-header);
+}
+
+/* Game title (h1). */
+.header__title {
+  margin: 0;
+  font-size: var(--font-size-title);
+}
+
+/* Container with the "New Game" and "Leaderboard" buttons. */
+.header__actions {
+  display: flex;
+  gap: var(--space-sm);
+}

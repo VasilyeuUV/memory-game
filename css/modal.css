@@ -1,0 +1,43 @@
+/* Modal overlay: dims the page and centers the dialog. Clicking it closes the modal. */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  background: var(--color-overlay);
+}
+
+/* Dialog window with the title, content and buttons. */
+.modal__dialog {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: 100%;
+  max-width: var(--modal-max-width);
+  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-modal);
+}
+
+/* Modal title (h2). */
+.modal__title {
+  margin: 0;
+  font-size: var(--font-size-modal-title);
+}
+
+/* Modal content area. */
+.modal__body {
+  margin: 0;
+}
+
+/* Row with the modal buttons. */
+.modal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+}

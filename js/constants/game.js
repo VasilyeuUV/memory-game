@@ -12,6 +12,14 @@
 export const MISMATCH_DELAY_MS = 1000;
 
 /**
+ * Pause (in milliseconds) between opening the last pair and showing the victory modal,
+ * so that the player sees the final flip.
+ *
+ * @type {number}
+ */
+export const VICTORY_MODAL_DELAY_MS = 600;
+
+/**
  * Possible outcomes of selecting a card (see `selectCard` in `game/game.js`).
  *
  * - `ignored`  — the click had no effect (unknown, opened or found card, or selection is locked);

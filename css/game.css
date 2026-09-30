@@ -1,0 +1,54 @@
+/* Game screen: counters above the board, as wide as the board. */
+.game {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: 100%;
+  max-width: var(--board-max-width);
+}
+
+/* Board: 4x4 grid of cards, scales down on small screens. */
+.board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--board-gap);
+}
+
+
+
+/*###################################################################################################################*/
+/* #region Counters */
+
+/* Row with the "Moves" and "Pairs" counters. */
+.counters {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+/* One counter: label and value in a card-like block. */
+.counters__item {
+  display: flex;
+  flex: 1;
+  align-items: baseline;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-header);
+}
+
+/* Counter caption ("Moves", "Pairs"). */
+.counters__label {
+  font-size: var(--font-size-label);
+}
+
+/* Counter number, e.g. "5" or "3 / 8". */
+.counters__value {
+  font-size: var(--font-size-counter);
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+}
+
+/* #endregion Counters */
