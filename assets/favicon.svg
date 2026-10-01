@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <clipPath id="back-clip">
+      <rect x="6" y="14" width="30" height="38" rx="5" />
+    </clipPath>
+  </defs>
+
+  <!-- Card back: purple with diagonal stripes, tilted left -->
+  <g transform="rotate(-10 21 33)">
+    <rect x="6" y="14" width="30" height="38" rx="5" fill="#6c4ad0" />
+    <g clip-path="url(#back-clip)" fill="#8f73e6">
+      <polygon points="0,30 14,14 24,14 0,40" />
+      <polygon points="12,52 36,28 36,40 24,52" />
+      <polygon points="30,14 36,14 36,20" />
+    </g>
+  </g>
+
+  <!-- Card front: white with a green "found" mark, tilted right -->
+  <g transform="rotate(10 43 31)">
+    <rect x="28" y="10" width="30" height="38" rx="5" fill="#ffffff" stroke="#3fb56b" stroke-width="3" />
+    <circle cx="43" cy="29" r="9" fill="#e6f7ec" stroke="#3fb56b" stroke-width="2.5" />
+    <path d="M38.5 29.5 l3.5 3.5 l6.5 -7" fill="none" stroke="#3fb56b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+</svg>
