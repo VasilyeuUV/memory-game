@@ -1,0 +1,80 @@
+/*
+ * Entry stylesheet: connects the stylesheets below and holds the general styles
+ * (tags, common blocks, shared classes such as buttons).
+ * Component styles live in separate files:
+ *   const.css  - design tokens (CSS variables)
+ *   header.css - page header
+ *   footer.css - page footer
+ *   game.css   - game screen: counters and board
+ *   card.css   - cards
+ *   modal.css  - modal windows
+ *   leaderboard.css - leaderboard modal
+ */
+
+@import url('const.css');
+@import url('header.css');
+@import url('footer.css');
+@import url('game.css');
+@import url('card.css');
+@import url('modal.css');
+@import url('leaderboard.css');
+
+
+
+/* Include padding and border in the element size everywhere. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Page background, default font and text color. */
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-family);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* Main content area: centers the board horizontally and takes all free height, so the footer sticks to the bottom of the page. */
+.main {
+  display: flex;
+  flex: 1;
+  align-items: flex-start;
+  justify-content: center;
+  padding: var(--space-lg) var(--space-md);
+}
+
+
+
+/*###################################################################################################################*/
+/* #region Buttons */
+
+/* Button used in the header (and later in modals). */
+.btn {
+  padding: var(--space-btn-y) var(--space-btn-x);
+  border: none;
+  border-radius: var(--radius-md);
+  font: inherit;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-on-primary);
+  background: var(--color-primary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+/* Button under the mouse cursor. */
+.btn:hover {
+  background: var(--color-primary-hover);
+}
+
+/* Button focused with the keyboard. */
+.btn:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* #endregion Buttons */

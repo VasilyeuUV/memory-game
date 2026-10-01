@@ -1,0 +1,46 @@
+/* Page footer: three columns — GitHub logo (left), year (center), RS School logo (right). */
+.footer {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-footer);
+}
+
+/* Link around a logo: the first one sticks to the left, the last one to the right. */
+.footer__link {
+  display: inline-flex;
+  justify-self: start;
+  border-radius: var(--radius-md);
+  transition: var(--transition-fast);
+}
+
+.footer__link:last-child {
+  justify-self: end;
+}
+
+/* Logo image under the mouse cursor. */
+.footer__link:hover {
+  opacity: 0.7;
+}
+
+/* Logo link focused with the keyboard. */
+.footer__link:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* Logo image of the footer. */
+.footer__logo {
+  display: block;
+  width: var(--footer-logo-size);
+  height: var(--footer-logo-size);
+}
+
+/* Year of creation in the middle of the footer. */
+.footer__year {
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-bold);
+}

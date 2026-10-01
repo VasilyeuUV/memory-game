@@ -1,0 +1,25 @@
+/* Results table: rank, moves, date. */
+.leaderboard__table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Header and body cells: spacing and a thin line between rows. */
+.leaderboard__table th,
+.leaderboard__table td {
+  padding: var(--space-xs) var(--space-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Column captions. */
+.leaderboard__table th {
+  font-weight: var(--font-weight-bold);
+}
+
+/* Message shown when there are no results yet. */
+.leaderboard__empty {
+  margin: 0;
+  text-align: center;
+}
