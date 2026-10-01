@@ -14,6 +14,11 @@
   gap: var(--board-gap);
 }
 
+/* Board while the cards are being dealt: clicks are ignored. */
+.board.is-dealing {
+  pointer-events: none;
+}
+
 
 
 /*###################################################################################################################*/

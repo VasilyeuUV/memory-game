@@ -4,7 +4,7 @@
  * Pure logic, no DOM access.
  */
 
-import { LEADERBOARD_SIZE, LEADERBOARD_STORAGE_KEY } from '../constants/game.js';
+import { LEADERBOARD } from '../constants/gameConst.js';
 import { STRINGS } from '../constants/strings.js';
 
 
@@ -46,7 +46,7 @@ function isValidResult(value) {
 
 
 /**
- * Loads the leaderboard: valid stored results, sorted, at most {@link LEADERBOARD_SIZE} of them.
+ * Loads the leaderboard: valid stored results, sorted, at most {@link LEADERBOARD.size} of them.
  * Missing storage data gives an empty list; corrupted or unavailable storage
  * gives an empty list and a warning in the console.
  *
@@ -54,13 +54,13 @@ function isValidResult(value) {
  */
 export function loadResults() {
   try {
-    const stored = JSON.parse(localStorage.getItem(LEADERBOARD_STORAGE_KEY));
+    const stored = JSON.parse(localStorage.getItem(LEADERBOARD.storageKey));
 
     return Array.isArray(stored)
       ? stored
         .filter(isValidResult)
         .sort(compareResults)
-        .slice(0, LEADERBOARD_SIZE)
+        .slice(0, LEADERBOARD.size)
       : [];
   } catch (error) {
     console.warn(STRINGS.errors.leaderboardRead, error);
@@ -81,10 +81,10 @@ export function loadResults() {
 export function saveResult(moves, date = Date.now()) {
   const results = [...loadResults(), { moves, date }]
     .sort(compareResults)
-    .slice(0, LEADERBOARD_SIZE);
+    .slice(0, LEADERBOARD.size);
 
   try {
-    localStorage.setItem(LEADERBOARD_STORAGE_KEY, JSON.stringify(results));
+    localStorage.setItem(LEADERBOARD.storageKey, JSON.stringify(results));
   } catch (error) {
     console.warn(STRINGS.errors.leaderboardSave, error);
   }

@@ -4,7 +4,7 @@
  * the caller decides when a mismatched pair is closed (see {@link closeMismatch}).
  */
 
-import { SELECT_RESULT } from '../constants/game.js';
+import { SELECT_RESULT } from '../constants/gameConst.js';
 import { PAIRS_COUNT, createShuffledDeck } from './cards.js';
 
 /**

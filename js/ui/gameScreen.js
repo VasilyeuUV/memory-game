@@ -4,11 +4,12 @@
  */
 
 import { CLASS_NAMES } from '../constants/classNames.js';
-import { MISMATCH_DELAY_MS, SELECT_RESULT, VICTORY_MODAL_DELAY_MS } from '../constants/game.js';
+import { DELAYS, SELECT_RESULT } from '../constants/gameConst.js';
 import { STRINGS } from '../constants/strings.js';
 import { PAIRS_COUNT } from '../game/cards.js';
 import { closeMismatch, createGame, getFoundPairs, isWon, selectCard } from '../game/game.js';
 import { saveResult } from '../game/storage.js';
+import { cancelDealAnimation, dealCards, flipCardsFaceDown, prefersReducedMotion } from './dealAnimation.js';
 import { el } from './dom.js';
 import { closeActiveModal, openVictoryModal } from './modal.js';
 
@@ -18,7 +19,8 @@ import { closeActiveModal, openVictoryModal } from './modal.js';
  *
  * @typedef {Object} GameScreen
  * @property {HTMLElement} element Root element to insert into the page.
- * @property {() => void} restart Starts a new game: reshuffles the cards and resets the counters.
+ * @property {() => Promise<void>} restart Starts a new game: reshuffles the cards, resets the counters
+ *   and plays the dealing animation. The promise resolves when the animation is over.
  */
 
 
@@ -38,6 +40,12 @@ export function createGameScreen() {
   /** Id of the pending timer that opens the victory modal (`undefined` if none). */
   let victoryTimer;
 
+  /** `true` while the dealing animation runs: cards cannot be selected. */
+  let isDealing = false;
+
+  /** Number of the latest restart; an older animation stops when a newer restart begins. */
+  let restartId = 0;
+
   /**
    * Handles a click on a card: updates the game state and the interface.
    *
@@ -45,6 +53,10 @@ export function createGameScreen() {
    * @returns {void}
    */
   function handleCardClick(cardId) {
+    if (isDealing) {
+      return;
+    }
+
     const result = selectCard(state, cardId);
 
     if (result === SELECT_RESULT.ignored) {
@@ -68,12 +80,12 @@ export function createGameScreen() {
 
       if (isWon(state)) {
         saveResult(state.moves);
-        victoryTimer = setTimeout(showVictory, VICTORY_MODAL_DELAY_MS);
+        victoryTimer = setTimeout(showVictory, DELAYS.victoryModalMs);
       }
       return;
     }
 
-    mismatchTimer = setTimeout(closeOpenedCards, MISMATCH_DELAY_MS);
+    mismatchTimer = setTimeout(closeOpenedCards, DELAYS.mismatchMs);
   }
 
 
@@ -103,24 +115,55 @@ export function createGameScreen() {
 
 
   /**
-   * Starts a new game: cancels pending timers, closes the modal,
-   * creates a new shuffled game and redraws the board and the counters.
+   * Starts a new game: cancels pending timers, closes the modal and creates a new
+   * shuffled game at once, then plays the dealing animation on the board:
+   * opened cards turn face down, gather in the center and are dealt one by one.
+   * Cards cannot be selected until the animation is over. Calling it again
+   * during the animation starts over.
    *
-   * @returns {void}
+   * @returns {Promise<void>} Resolves when the animation is over (or was replaced by a newer restart).
    */
-  function restart() {
+  async function restart() {
+    restartId += 1;
+    const currentRestartId = restartId;
+    const animate = !prefersReducedMotion();
+
     clearTimeout(mismatchTimer);
     clearTimeout(victoryTimer);
     mismatchTimer = undefined;
     victoryTimer = undefined;
     closeActiveModal();
 
+    isDealing = true;
+    board.classList.add(CLASS_NAMES.state.dealing);
+    cancelDealAnimation(board);
+
     state = createGame();
     counters.update(0, 0);
 
+    if (animate) {
+      await flipCardsFaceDown(board);
+
+      if (currentRestartId !== restartId) {
+        return;
+      }
+    }
+
     const newBoard = createBoard(state.cards, handleCardClick);
+    newBoard.classList.add(CLASS_NAMES.state.dealing);
     board.replaceWith(newBoard);
     board = newBoard;
+
+    if (animate) {
+      await dealCards(board);
+
+      if (currentRestartId !== restartId) {
+        return;
+      }
+    }
+
+    board.classList.remove(CLASS_NAMES.state.dealing);
+    isDealing = false;
   }
 
   return {

@@ -16,7 +16,7 @@
  *   leaderboard: Readonly<{ table: string, empty: string }>,
  *   modal: Readonly<{ root: string, dialog: string, title: string, body: string, actions: string }>,
  *   card: Readonly<{ root: string, inner: string, front: string, back: string }>,
- *   state: Readonly<{ flipped: string, matched: string }>,
+ *   state: Readonly<{ flipped: string, matched: string, dealing: string }>,
  *   button: string
  * }>}
  */
@@ -55,6 +55,7 @@ export const CLASS_NAMES = Object.freeze({
   state: Object.freeze({
     flipped: 'is-flipped',
     matched: 'is-matched',
+    dealing: 'is-dealing',
   }),
   button: 'btn',
 });
