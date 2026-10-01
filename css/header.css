@@ -1,4 +1,4 @@
-/* Page header: title on the left, actions on the right, wraps on narrow screens. */
+/* Page header: title on the left, actions on the right (centered in two rows on narrow screens, see below). */
 .header {
   display: flex;
   flex-wrap: wrap;
@@ -20,4 +20,17 @@
 .header__actions {
   display: flex;
   gap: var(--space-sm);
+}
+
+/*
+ * Narrow screens: the title and the buttons no longer fit in one row (about 495px:
+ * title + gap + buttons + side paddings), so they go to two rows, both centered.
+ * The breakpoint has a small reserve for wider fallback fonts.
+ */
+@media (max-width: 540px) {
+  .header {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
 }
