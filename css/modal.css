@@ -1,3 +1,8 @@
+/* Body while a modal is open: the page behind the modal does not scroll. */
+body.is-scroll-locked {
+  overflow: hidden;
+}
+
 /* Modal overlay: dims the page and centers the dialog. Clicking it closes the modal. */
 .modal {
   position: fixed;

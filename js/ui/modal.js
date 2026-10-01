@@ -71,6 +71,7 @@ export function openLeaderboardModal() {
 /**
  * Opens a modal in the page, closing the previous one if it is still open.
  * It is closed by the Escape key, by a click on the background or by any of its buttons.
+ * While a modal is open the page behind it cannot be scrolled.
  * Keyboard focus moves into the modal and returns to the previous element on close.
  *
  * @param {ModalOptions} options Title, content and buttons of the modal.
@@ -120,6 +121,7 @@ export function openModal({ title, content, buttons = [] }) {
     isClosed = true;
     document.removeEventListener('keydown', handleKeydown);
     overlay.remove();
+    unlockPageScroll();
 
     if (activeModal === handle) {
       activeModal = null;
@@ -134,10 +136,39 @@ export function openModal({ title, content, buttons = [] }) {
 
   activeModal = handle;
   document.addEventListener('keydown', handleKeydown);
+  lockPageScroll();
   append(document.body, overlay);
   (actionButtons[0] ?? dialog).focus();
 
   return handle;
+}
+
+
+/**
+ * Blocks scrolling of the page behind a modal. The width of the disappearing scrollbar
+ * is compensated with a padding, so the page does not jump sideways.
+ *
+ * @returns {void}
+ */
+function lockPageScroll() {
+  const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+  if (scrollbarWidth > 0) {
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+  }
+
+  document.body.classList.add(CLASS_NAMES.state.scrollLocked);
+}
+
+
+/**
+ * Allows scrolling of the page again after a modal is closed.
+ *
+ * @returns {void}
+ */
+function unlockPageScroll() {
+  document.body.classList.remove(CLASS_NAMES.state.scrollLocked);
+  document.body.style.paddingRight = '';
 }
 
 
