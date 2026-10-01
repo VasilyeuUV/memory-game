@@ -3,12 +3,12 @@
  * Application entry point: builds the interface and mounts it into `<body>`.
  */
 
-import { append, createHeader, createMain } from './ui/dom.js';
+import { append, createFooter, createHeader, createMain } from './ui/dom.js';
 import { createGameScreen } from './ui/gameScreen.js';
 import { openLeaderboardModal } from './ui/modal.js';
 
 /**
- * Appends the header and the game screen (a new game) to `<body>`.
+ * Appends the header, the game screen (a new game) and the footer to `<body>`.
  *
  * @returns {void}
  */
@@ -22,6 +22,7 @@ function init() {
       onLeaderboard: openLeaderboardModal
     }),
     createMain(gameScreen.element),
+    createFooter(),
   );
 }
 

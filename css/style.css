@@ -4,6 +4,7 @@
  * Component styles live in separate files:
  *   const.css  - design tokens (CSS variables)
  *   header.css - page header
+ *   footer.css - page footer
  *   game.css   - game screen: counters and board
  *   card.css   - cards
  *   modal.css  - modal windows
@@ -12,6 +13,7 @@
 
 @import url('const.css');
 @import url('header.css');
+@import url('footer.css');
 @import url('game.css');
 @import url('card.css');
 @import url('modal.css');
@@ -28,6 +30,8 @@
 
 /* Page background, default font and text color. */
 body {
+  display: flex;
+  flex-direction: column;
   margin: 0;
   min-height: 100vh;
   font-family: var(--font-family);
@@ -35,9 +39,11 @@ body {
   color: var(--color-text);
 }
 
-/* Main content area: centers the board horizontally. */
+/* Main content area: centers the board horizontally and takes all free height, so the footer sticks to the bottom of the page. */
 .main {
   display: flex;
+  flex: 1;
+  align-items: flex-start;
   justify-content: center;
   padding: var(--space-lg) var(--space-md);
 }

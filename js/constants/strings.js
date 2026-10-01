@@ -11,6 +11,7 @@
  *   header: Readonly<{ title: string, newGame: string, leaderboard: string }>,
  *   counters: Readonly<{ moves: string, pairs: string }>,
  *   card: Readonly<{ label: string }>,
+ *   footer: Readonly<{ githubLink: string, rsSchoolLink: string }>,
  *   errors: Readonly<{ leaderboardRead: string, leaderboardSave: string }>,
  *   leaderboard: Readonly<{
  *     title: string, rank: string, moves: string, date: string, empty: string, close: string
@@ -39,6 +40,10 @@ export const STRINGS = Object.freeze({
     date: 'Date',
     empty: 'No results yet. Win a game to get on the board!',
     close: 'Close',
+  }),
+  footer: Object.freeze({
+    githubLink: 'Project on GitHub',
+    rsSchoolLink: 'Task description at RS School',
   }),
   card: Object.freeze({
     label: 'Card',

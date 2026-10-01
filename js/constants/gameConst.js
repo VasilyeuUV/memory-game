@@ -75,3 +75,28 @@ export const DEAL_ANIMATION = Object.freeze({
   pileMaxRotationDeg: 12,
   pileMaxOffsetPx: 6,
 });
+
+
+/**
+ * Footer content: the year the game was created, the two links and the logo images.
+ *
+ * - `createdYear` — year shown in the middle of the footer;
+ * - `projectUrl`  — repository of the project (GitHub logo, left);
+ * - `taskUrl`     — description of the task at RS School (RS School logo, right);
+ * - `githubLogo`, `rsSchoolLogo` — paths of the logo images.
+ *
+ * @type {Readonly<{
+ *   createdYear: number,
+ *   projectUrl: string,
+ *   taskUrl: string,
+ *   githubLogo: string,
+ *   rsSchoolLogo: string
+ * }>}
+ */
+export const FOOTER = Object.freeze({
+  createdYear: 2026,
+  projectUrl: 'https://github.com/VasilyeuUV/memory-game',
+  taskUrl: 'https://github.com/rolling-scopes-school/tasks/tree/master/tasks/memory-game',
+  githubLogo: 'assets/github.svg',
+  rsSchoolLogo: 'assets/rs-school.svg',
+});

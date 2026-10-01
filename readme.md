@@ -17,3 +17,31 @@ Deploy: <https://vasilyeuuv.github.io/memory-game/>
 5. **New Game** reshuffles and deals the cards again at any time; **Leaderboard** shows the 10 best results.
 
 ![Victory modal](docs/screenshots/03-victory.jpg)
+
+## Local setup
+
+The game has no dependencies and no build step. It uses ES modules, which browsers do not load from `file://`, so serve the folder over HTTP.
+
+1. Clone the repository and switch to the working branch:
+
+   ```bash
+   git clone https://github.com/VasilyeuUV/memory-game.git
+   cd memory-game
+   git checkout memory-game
+   ```
+
+2. Start any static server in the project folder, for example:
+
+   ```bash
+   npx serve .
+   ```
+
+   or
+
+   ```bash
+   python -m http.server 5500
+   ```
+
+   or use the **Live Server** extension in VS Code (right click on `index.html` → *Open with Live Server*).
+
+3. Open the printed address in a browser (for `python -m http.server 5500` it is <http://localhost:5500>).

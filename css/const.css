@@ -36,6 +36,7 @@
   /* Shape and effects */
   --radius-md: 8px;
   --shadow-header: 0 1px 4px rgba(43, 37, 64, 0.12);
+  --shadow-footer: 0 -1px 4px rgba(43, 37, 64, 0.12);
   --focus-ring-width: 3px;
   --focus-ring-offset: 2px;
   --transition-fast: 0.2s;
@@ -44,6 +45,7 @@
   --card-perspective: 800px;
   --matched-ring-width: 3px;
   --board-max-width: 520px;
+  --footer-logo-size: 32px;
   --modal-max-width: 400px;
   --shadow-modal: 0 8px 32px rgba(43, 37, 64, 0.3);
   --z-modal: 100;

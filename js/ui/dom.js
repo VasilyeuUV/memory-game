@@ -1,13 +1,14 @@
 /**
  * @module ui/dom
  * Building blocks of the DOM tree: the generic helpers (`el`, `append`, `clear`, ...)
- * and the components shared by the whole page (button, header, main area).
+ * and the components shared by the whole page (button, header, main area, footer).
  * Game-specific elements are built in `ui/gameScreen.js`, modal windows in `ui/modal.js`.
  * All elements are created exclusively through `document.createElement`;
  * no HTML strings are parsed anywhere in this module.
  */
 
 import { CLASS_NAMES } from '../constants/classNames.js';
+import { FOOTER } from '../constants/gameConst.js';
 import { STRINGS } from '../constants/strings.js';
 
 
@@ -183,6 +184,44 @@ export function createButton(label, onClick) {
       ? { click: onClick }
       : {},
   });
+}
+
+
+/**
+ * Creates the page footer: the GitHub logo linking to the project on the left,
+ * the year the game was created in the middle and the RS School logo linking
+ * to the task description on the right.
+ *
+ * @returns {HTMLElement} The `<footer>` element.
+ */
+export function createFooter() {
+  return el(
+    'footer',
+    { className: CLASS_NAMES.footer.root },
+    createLogoLink(FOOTER.projectUrl, FOOTER.githubLogo, STRINGS.footer.githubLink),
+    el('span', { className: CLASS_NAMES.footer.year, text: String(FOOTER.createdYear) }),
+    createLogoLink(FOOTER.taskUrl, FOOTER.rsSchoolLogo, STRINGS.footer.rsSchoolLink),
+  );
+}
+
+
+/**
+ * Creates a link that consists of a logo image. It opens in a new tab.
+ *
+ * @param {string} href Address the link leads to.
+ * @param {string} logoSrc Path of the logo image.
+ * @param {string} label Accessible name of the link, also the alternative text of the image.
+ * @returns {HTMLAnchorElement} The `<a>` element.
+ */
+function createLogoLink(href, logoSrc, label) {
+  return el(
+    'a',
+    {
+      className: CLASS_NAMES.footer.link,
+      attrs: { href, target: '_blank', rel: 'noopener noreferrer', 'aria-label': label, title: label },
+    },
+    el('img', { className: CLASS_NAMES.footer.logo, attrs: { src: logoSrc, alt: '' } }),
+  );
 }
 
 /* #endregion Components */

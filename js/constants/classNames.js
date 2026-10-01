@@ -10,6 +10,7 @@
  * @type {Readonly<{
  *   header: Readonly<{ root: string, title: string, actions: string }>,
  *   main: string,
+ *   footer: Readonly<{ root: string, link: string, logo: string, year: string }>,
  *   game: string,
  *   counters: Readonly<{ root: string, item: string, label: string, value: string }>,
  *   board: string,
@@ -27,6 +28,12 @@ export const CLASS_NAMES = Object.freeze({
     actions: 'header__actions',
   }),
   main: 'main',
+  footer: Object.freeze({
+    root: 'footer',
+    link: 'footer__link',
+    logo: 'footer__logo',
+    year: 'footer__year',
+  }),
   game: 'game',
   counters: Object.freeze({
     root: 'counters',
